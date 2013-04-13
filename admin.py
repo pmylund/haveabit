@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import logging
 from xml.sax.saxutils import quoteattr, escape
 from google.appengine.api import memcache
 from google.appengine.ext import webapp
@@ -22,6 +23,7 @@ class MainPage(Request):
 
 class Add(Request):
 
+
     def post(self, type):
         res = 0
         if type == 'category':
@@ -33,7 +35,8 @@ class Add(Request):
         elif type == 'author':
             img_url = self.request.get('img_url')
             if img_url:
-                img_width, img_height = utils.getImageDimensions(utils.downloadFile(img_url))
+                imgsrc = utils.get_image_url(self.request.url, img_url)
+                img_width, img_height = utils.getImageDimensions(utils.downloadFile(imgsrc))
             else:
                 img_width = None
                 img_height = None

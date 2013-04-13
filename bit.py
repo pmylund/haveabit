@@ -1,6 +1,8 @@
 from django.utils.html import linebreaks
 
 import settings
+import utils
+
 if settings.use_strftime:
     import gregtime
 
@@ -8,12 +10,15 @@ class Quote:
 
     def renderTeaser(self):
         output = ''
+
         if self.img_url:
-            output = '<img src="%s" title="%s" alt="%s"%s%s />' % (self.img_url, self.name, self.name, ' width="%s"' % (self.img_width,) if self.img_width else '', ' height="%s"' % (self.img_height,) if self.img_height else '')
+            imgsrc = utils.get_img_src(self.img_url)
+            output = '<img src="%s" title="%s" alt="%s"%s%s />' % (imgsrc, self.name, self.name, ' width="%s"' % (self.img_width,) if self.img_width else '', ' height="%s"' % (self.img_height,) if self.img_height else '')
         elif self.html:
             output = self.html
         elif self.author.img_url:
-            output = '<img src="%s" title="%s" alt="%s"%s%s />' % (self.author.img_url, self.author.name, self.author.name, ' width="%s"' % (self.author.img_width,) if self.author.img_width else '', ' height="%s"' % (self.author.img_height,) if self.author.img_height else '')
+            imgsrc = '/images' + self.author.img_url
+            output = '<img src="%s" title="%s" alt="%s"%s%s />' % (imgsrc, self.author.name, self.author.name, ' width="%s"' % (self.author.img_width,) if self.author.img_width else '', ' height="%s"' % (self.author.img_height,) if self.author.img_height else '')
         output = output + '<br /><br />' if output else ''
         return output
 

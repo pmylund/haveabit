@@ -9,11 +9,11 @@
 {% block headline %}Have a Bit of {{ author.name }}{% endblock %}
 
 {% block teaser %}
-{{ teaser }}
+{{ teaser|safe }}
 {% endblock %}
 
 {% block content %}
-{{ quote }}
+{{ quote|safe }}
 
 {% if show_comments %}
 <div id="comments">

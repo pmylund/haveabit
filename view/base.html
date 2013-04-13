@@ -8,14 +8,16 @@
 <meta name="keywords" content="haveabitof, have a bit, have a bit of" />{% endblock %}
 <meta property="fb:page_id" content="187949654568853" />
 <meta property="og:site_name" content="Have a Bit"/>
-<link rel="stylesheet" href="http://static.haveabit.com/style/hab32.css" type="text/css" media="screen, projection" />
-{% comment %}<link rel="stylesheet" href="/style/habXX.css" type="text/css" media="screen, projection" />{% endcomment %}
+<link rel="stylesheet" href="/style/hab32.css" type="text/css" media="screen, projection" />
+{% comment %}
+The styles are served up statically from static.domain.com based on rules specified in app.yaml
+<link rel="stylesheet" href="/style/habXX.css" type="text/css" media="screen, projection" />{% endcomment %}
 <link rel="alternate" type="application/rss+xml" title="Have a Bit RSS Feed" href="http://feeds.haveabit.com/haveabit" />
-<link rel="SHORTCUT ICON" href="http://static.haveabit.com/favicon.ico" />
+<link rel="SHORTCUT ICON" href="/favicon.ico" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://static.haveabit.com/style/effects4.js"></script>
+<script type="text/javascript" src="/style/effects4.js"></script>
+{% if gaq_on %}
 <script type="text/javascript">
-
 	var _gaq = _gaq || [];
 	_gaq.push(['_setAccount', 'UA-40104563-1']);
 	_gaq.push(['_trackPageview']);
@@ -26,6 +28,7 @@
 	 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 					   })();
 </script>
+{% endif %}
 
 </head>
 <body>

@@ -135,6 +135,16 @@ def getNotFoundPage():
 def getCachedPage(name):
     return memcache.get('page|' + name)
 
+""" Checks for the page first in the cache.  If the page isn't there
+	it sets it into the cache and returns it.
+	
+	Parameters:
+		name: the name of the page, a single word used to create a memcache key
+		file: the absolute path from the application root to the page to render.
+		dict: template values to bind into the page.  will be cached.
+	Returns:
+		a rendered page template
+"""
 def getPage(name, file, dict=dict()):
     mc_key = 'page|' + name
     val = memcache.get(mc_key)
@@ -143,6 +153,7 @@ def getPage(name, file, dict=dict()):
         memcache.set(mc_key, val, settings.page_cache_duration)
     return val
 
+# create the routing table
 application = webapp.WSGIApplication(
                                      [('/', MainPage),
                                       ('/about', AboutPage),
