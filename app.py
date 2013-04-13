@@ -10,6 +10,8 @@ import settings
 import db
 from request import Request
 
+import sys, pdb
+
 class MainPage(Request):
 
     def get(self):
@@ -151,7 +153,7 @@ application = webapp.WSGIApplication(
                                       (r'/(.*)/(.*)', QuotePage),
                                       (r'/(.*)', QuotePage),
                                       ],
-                                     debug=False)
+                                     debug=True)
 
 if __name__ == '__main__':
     run_wsgi_app(application)

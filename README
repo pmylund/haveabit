@@ -1,4 +1,48 @@
 Have a Bit
 http://www.haveabit.com
 
-The source for the website's Google App Engine application is only available for the extremely curious right now. Use at your own risk! :)
+Pre-Requisites: 
+	YUI-Compressor
+	Google App-Engine Account
+	Python 2.7
+	Google App Engine SDK - Python
+
+images are provided in the images directory and are made available at addresses like:
+	"http://static.haveabit.com/images/authors/lincoln.jpg" 
+
+Different Models used on the pages:
+	Author
+	    str name
+			used as first part of title on quote page.
+			used on quote page after "Have a bit of "
+		str slug
+			used as the short, textual identifier for an author
+		str description
+			used in the rss feed, nothing else		
+		str img_url
+			the url to use as the image's source
+		int img_width
+			automatically generated when img is referenced
+		int img_height
+			automatically generated when img is referenced
+		date date_birth
+		date date_death
+
+	Category - not really used anywhere; originally was probably
+			meant to categorize quotes but never completed
+		str name
+		str slug
+
+	Quote
+		ref author
+		list categories
+		str name
+			used as second part of title on quote page
+		str description
+		text text
+		str img_url
+		int img_width
+		int img_height
+		text html
+		datetime date
+		float rand
