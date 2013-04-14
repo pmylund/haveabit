@@ -24,6 +24,8 @@ class MainPage(Request):
             authors = db.getAuthors()
             template_values = {
                 'authors': authors,
+				'gaq_on': settings.gaq_on,
+				'gaq_account': settings.gaq_account
             }
             self.send(getPage('index', 'view/index.html', template_values))
 

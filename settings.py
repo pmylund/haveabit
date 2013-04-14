@@ -8,7 +8,7 @@ import os
 		2. decide whether google analytics should be on or off
 """
 hostname = 'www.71a278db-cc99-4c78-b6fa-3338a9.appspot.com' # your domain's hostname
-gaq_on = False								 # True embeds google analytics into the site
+gaq_on = False  							 # True embeds google analytics into the site
 gaq_account = 'UA-40104563-1'				 # set this to the analytics account #
 											 # if gaq_on is True
 base_image_dir = '/images'

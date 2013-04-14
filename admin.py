@@ -8,6 +8,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 import db
 import utils
+import settings
 from request import Request
 
 class MainPage(Request):
@@ -18,6 +19,8 @@ class MainPage(Request):
         template_values = {
             'authors': authors,
             'categories': categories,
+			'gaq_on': settings.gaq_on,
+			'gaq_account': settings.gaq_account
         }
         self.send(template.render('view/admin/index.html', template_values))
 
