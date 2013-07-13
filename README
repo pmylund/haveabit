@@ -1,3 +1,5 @@
+The source for the website's Google App Engine application is only available for the extremely curious right now. Use at your own risk! :)
+
 Have a Bit
 http://www.haveabit.com
 
@@ -7,24 +9,24 @@ Pre-Requisites:
 	Python 2.7
 	Google App Engine SDK - Python
 
-images are provided in the images directory and are made available at addresses like:
+Images are provided in the images directory and are made available at addresses like:
 	"http://static.haveabit.com/images/authors/lincoln.jpg" 
 
 Different Models used on the pages:
 	Author
-	    str name
-			used as first part of title on quote page.
-			used on quote page after "Have a bit of "
+    str name
+			Used as first part of title on quote page.
+			Used on quote page after "Have a bit of "
 		str slug
-			used as the short, textual identifier for an author
+			Used as the short, textual identifier for an author
 		str description
-			used in the rss feed, nothing else		
+			Used in the rss feed, nothing else		
 		str img_url
-			the url to use as the image's source
+			The url to use as the image's source
 		int img_width
-			automatically generated when img is referenced
+			Automatically generated when img is referenced
 		int img_height
-			automatically generated when img is referenced
+			Automatically generated when img is referenced
 		date date_birth
 		date date_death
 

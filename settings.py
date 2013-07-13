@@ -7,13 +7,11 @@ import os
 				ex. www.applicationname.appspot.com
 		2. decide whether google analytics should be on or off
 """
-hostname = 'www.71a278db-cc99-4c78-b6fa-3338a9.appspot.com' # your domain's hostname
-gaq_on = False  							 # True embeds google analytics into the site
-gaq_account = 'UA-40104563-1'				 # set this to the analytics account #
-											 # if gaq_on is True
+#hostname = 'www.71a278db-cc99-4c78-b6fa-3338a9.appspot.com' # your domain's hostname
+gaq_on = False                             # True embeds google analytics into the site
+gaq_account = 'UA-40104563-1'                 # set this to the analytics account if gaq_on is True
 base_image_dir = '/images'
-use_strftime = False						 # If the birth & death dates should be
-											 # in strftime_format
+use_strftime = False                         # If the birth & death dates should be in strftime format
 strftime_format = '%b %e, %Y'
 cache_control = 'public, max-age=3600'       # Default browser Cache-Control for pages that might change
 long_cache_control = 'public, max-age=7200'  # Default browser Cache-Control for pages that rarely change

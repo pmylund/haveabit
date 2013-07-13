@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import operator
-from xml.sax.saxutils import quoteattr, escape
+from xml.sax.saxutils import quoteattr
 from google.appengine.api import memcache
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
@@ -10,10 +10,8 @@ import settings
 import db
 from request import Request
 
-import sys, pdb
 
 class MainPage(Request):
-
     def get(self):
         self.verifyUrl()
         self.response.headers['Cache-Control'] = settings.cache_control
@@ -24,16 +22,15 @@ class MainPage(Request):
             authors = db.getAuthors()
             template_values = {
                 'authors': authors,
-				'gaq_on': settings.gaq_on,
-				'gaq_account': settings.gaq_account
+                'gaq_on': settings.gaq_on,
+                'gaq_account': settings.gaq_account
             }
             self.send(getPage('index', 'view/index.html', template_values))
 
-class QuotePage(Request):
 
+class QuotePage(Request):
     def get(self, author_slug=None, id=None):
         self.verifyUrl()
-        author = None
         show_comments = False
         if id:
             try:
@@ -89,10 +86,12 @@ class QuotePage(Request):
                 'meta_keywords': quoteattr(', '.join((quote.name, author.name, author.slug))),
                 'show_comments': show_comments,
             }
-            self.send(getPage('quote|%d%s' % (quote.key().id(), '|show_comments' if show_comments else ''), 'view/quote.html', template_values))
+            self.send(
+                getPage('quote|%d%s' % (quote.key().id(), '|show_comments' if show_comments else ''), 'view/quote.html',
+                        template_values))
+
 
 class ListPage(Request):
-
     def get(self):
         self.verifyUrl()
         self.response.headers['Cache-Control'] = settings.cache_control
@@ -110,44 +109,45 @@ class ListPage(Request):
             }
             self.send(getPage('list', 'view/list.html', template_values))
 
-class AboutPage(Request):
 
+class AboutPage(Request):
     def get(self):
         self.verifyUrl()
         self.response.headers['Cache-Control'] = settings.cache_control
         self.send(getPage('about', 'view/about.html'))
 
-class Api(Request):
 
+class Api(Request):
     def get(self):
         self.verifyUrl()
         self.response.headers['Cache-Control'] = settings.cache_control
         self.send('api')
 
-class ApiHelp(Request):
 
+class ApiHelp(Request):
     def get(self):
         self.verifyUrl()
         self.response.headers['Cache-Control'] = settings.cache_control
         self.send(getPage('apihelp', 'view/apihelp.html'))
 
+
 def getNotFoundPage():
     return getPage('404', 'view/404.html')
+
 
 def getCachedPage(name):
     return memcache.get('page|' + name)
 
-""" Checks for the page first in the cache.  If the page isn't there
-	it sets it into the cache and returns it.
-	
-	Parameters:
-		name: the name of the page, a single word used to create a memcache key
-		file: the absolute path from the application root to the page to render.
-		dict: template values to bind into the page.  will be cached.
-	Returns:
-		a rendered page template
-"""
+
 def getPage(name, file, dict=dict()):
+    """
+    Checks for the page first in the cache.  If the page isn't there
+        it sets it into the cache and returns it.
+    :param name: the name of the page, a single word used to create a memcache key
+    :param file: the absolute path from the application root to the page to render.
+    :param dict: template values to bind into the page.  will be cached.
+    :return: a rendered page template
+    """
     mc_key = 'page|' + name
     val = memcache.get(mc_key)
     if val is None:
@@ -157,16 +157,16 @@ def getPage(name, file, dict=dict()):
 
 # create the routing table
 application = webapp.WSGIApplication(
-                                     [('/', MainPage),
-                                      ('/about', AboutPage),
-                                      ('/list', ListPage),
-                                      ('/api', Api),
-                                      ('/apihelp', ApiHelp),
-                                      ('/random', QuotePage),
-                                      (r'/(.*)/(.*)', QuotePage),
-                                      (r'/(.*)', QuotePage),
-                                      ],
-                                     debug=True)
+    [('/', MainPage),
+     ('/about', AboutPage),
+     ('/list', ListPage),
+     ('/api', Api),
+     ('/apihelp', ApiHelp),
+     ('/random', QuotePage),
+     (r'/(.*)/(.*)', QuotePage),
+     (r'/(.*)', QuotePage),
+    ],
+    debug=True)
 
 if __name__ == '__main__':
     run_wsgi_app(application)

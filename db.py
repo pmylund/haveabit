@@ -1,4 +1,3 @@
-import logging
 import datetime
 import random
 from google.appengine.ext import db
@@ -93,7 +92,6 @@ def getAuthors():
         authors.order('name')
         val = list(authors)
         memcache.set(mc_key, val, settings.quotelist_cache_duration)
-	logging.error('this is a log by nate')
     return val
 
 def getQuotes(author=None):

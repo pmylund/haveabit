@@ -9,7 +9,7 @@
 
 <div id="authorlist">
 {% for author in authors %}
-<a href="/{{ author.slug }}" title="{{ author.name }} - {{ author.description }}" rel="nofollow"><img src="/images{{ author.img_url }}" width="150" height="200" class="imagedropshadow"></a>
+<a href="/{{ author.slug }}" title="{{ author.name }} - {{ author.description }}" rel="nofollow"><img src="{{ base_image_dir }}{{ author.img_url }}" width="150" height="200" class="imagedropshadow"></a>
 {% endfor %}
 </div>
 

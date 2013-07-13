@@ -17,7 +17,7 @@ class Quote:
         elif self.html:
             output = self.html
         elif self.author.img_url:
-            imgsrc = '/images' + self.author.img_url
+            imgsrc = utils.get_img_src(self.img_url)
             output = '<img src="%s" title="%s" alt="%s"%s%s />' % (imgsrc, self.author.name, self.author.name, ' width="%s"' % (self.author.img_width,) if self.author.img_width else '', ' height="%s"' % (self.author.img_height,) if self.author.img_height else '')
         output = output + '<br /><br />' if output else ''
         return output
