@@ -15,7 +15,7 @@ class Feed(Request):
         if self.request.headers['User-Agent'].startswith('FeedBurner'):
             self.send(getFeed())
         else:
-            self.redirect('http://feeds.haveabit.com/haveabit', permanent=True)
+            self.redirect('http://feeds.haveabit.com/haveabit', permanent=False)
 
 def getFeed():
     mc_key = 'feed'

@@ -1,9 +1,14 @@
-application: haveabitof
-version: 1
-runtime: python
+application: 71a278db-cc99-4c78-b6fa-3338a9
+version: 2
+runtime: python27
+threadsafe: no
 api_version: 1
 
 default_expiration: "3650d"
+
+libraries:
+- name: django
+  version: "1.4"
 
 builtins:
 - appstats: on
@@ -46,20 +51,20 @@ handlers:
 
 - url: /admin(/.*)?
   script: admin.py
-  login: admin
+#  login: admin
 
 - url: /console/static
   static_dir: console/app/view/static
   expiration: 30m
-  login: admin
+#  login: admin
 
 - url: /console.*
   script: console/app/console.py
-  login: admin
+#  login: admin
 
 - url: /cron/refreshcache
   script: cron/refreshcache.py
-  login: admin
+#  login: admin
 
 - url: /.*
   script: app.py

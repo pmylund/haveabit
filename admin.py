@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import logging
 from xml.sax.saxutils import quoteattr, escape
 from google.appengine.api import memcache
 from google.appengine.ext import webapp
@@ -7,6 +8,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 import db
 import utils
+import settings
 from request import Request
 
 class MainPage(Request):
@@ -17,10 +19,13 @@ class MainPage(Request):
         template_values = {
             'authors': authors,
             'categories': categories,
+			'gaq_on': settings.gaq_on,
+			'gaq_account': settings.gaq_account
         }
         self.send(template.render('view/admin/index.html', template_values))
 
 class Add(Request):
+
 
     def post(self, type):
         res = 0
@@ -33,7 +38,8 @@ class Add(Request):
         elif type == 'author':
             img_url = self.request.get('img_url')
             if img_url:
-                img_width, img_height = utils.getImageDimensions(utils.downloadFile(img_url))
+                imgsrc = utils.get_image_url(self.request.url, img_url)
+                img_width, img_height = utils.getImageDimensions(utils.downloadFile(imgsrc))
             else:
                 img_width = None
                 img_height = None
